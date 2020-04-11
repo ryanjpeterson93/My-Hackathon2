@@ -70,5 +70,7 @@ export class AuthProvider extends React.Component {
         { this.props.children }
       </AuthContext.Provider>
     )
-}  
-}
+  }
+};
+
+export default AuthProvider;

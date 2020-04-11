@@ -1,6 +1,6 @@
 import React, {  useState, useEffect, } from "react";
 import { Link, } from "react-router-dom";
-import { Card, } from 'semantic-ui-react';
+import { Card, Button, } from 'semantic-ui-react';
 import axios from 'axios';
 
 const Artist = (props) => {
@@ -39,6 +39,8 @@ const Artist = (props) => {
       <Card.Header>{props.name}</Card.Header>
       <Card.Content>Genre: {props.genre}</Card.Content>
       <Card.Content>Albums: {renderAlbums()}</Card.Content>
+      <Button color="blue" >Edit</Button>
+      <Button color="red">Delete</Button>
     </Card>
   )
 }
