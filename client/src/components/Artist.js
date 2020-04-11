@@ -1,31 +1,15 @@
-import React, {  useState, useEffect, } from "react";
-import { Link, } from "react-router-dom";
+import React, {  useState, useEffect, useContext } from "react";
 import { Card, Button, } from 'semantic-ui-react';
-import axios from 'axios';
+import ArtistForm from '../components/forms/ArtistForm';
+import { AuthContext, } from "../providers/AuthProvider";
+
 
 const Artist = (props) => {
   const { albums, setAlbums } = useState([]);
+  const { user } = useContext(AuthContext)
+  const [editing, setEditing] = useState(false);
  
   const artist = {id: props.id, albums: props.albums, genre: props.genre, name: props.name, }
- 
- 
-  // let albumsShow = artist.albums.map((str) => ({ name: str}));
-  
-  // const renderAlbums = () => {
-  //   return(
-  //   albumsShow.map(album=>{
-  //     return album.name
-  //   }))
-
-    // const renderArtists = () => {
-    //   return artists.map( artist => (
-    //     <Artist key={artist.id} {...artist} />
-    //   ))
-    // };
-    // return( albums.forEach( album => {
-    //   return "album"
-    // }));
-  // };
 
   const renderAlbums = () => {
     console.log(props.albums.length)
@@ -39,8 +23,9 @@ const Artist = (props) => {
       <Card.Header>{props.name}</Card.Header>
       <Card.Content>Genre: {props.genre}</Card.Content>
       <Card.Content>Albums: {renderAlbums()}</Card.Content>
-      <Button color="blue" >Edit</Button>
-      <Button color="red">Delete</Button>
+      <Button color="blue" onClick={() => setEditing(!editing)}>Edit</Button>
+      <Button color="red" onClick={() => props.deleteArtist(props.id, user.id)}>Delete</Button>
+      { editing && <ArtistForm toggleEdit={setEditing} editArtist={props.editArtist} {...props} />}
     </Card>
   )
 }
