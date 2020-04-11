@@ -133,7 +133,7 @@ class UserPage extends React.Component {
               return (
                 <div style={style.item}>
                   <div style={{ width: '50%' }}>
-                    <h2 style={{ marginBottom: '2%' }}>Name</h2>
+                    <h2 style={{ marginBottom: '2%' }}>{item.name}</h2>
                     <div >
                       <h5 style={{ margin: '0px' }}>Genre</h5>
                       <h6 style={{ margin: '0px' }}>{item.genre}</h6>

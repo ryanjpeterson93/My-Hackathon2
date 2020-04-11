@@ -10,19 +10,44 @@ class Navbar extends React.Component {
 
     if (user) {
       return (
-        <Menu.Menu position='right'>
-          <Menu.Item
-            name='logout'
-            onClick={() => handleLogout(this.props.history)}
-          />
-          <Link to='/userpage'>
+        <>
+          <Menu.Menu position='left'>
+            <Link to='/all_artists'>
+              <Menu.Item
+                name='artists'
+                id='artists'
+                active={this.props.location.pathname === '/all_artists'}
+              />
+            </Link>
+            <Link to='/all_movies'>
+              <Menu.Item
+                name='movies'
+                id='movies'
+                active={this.props.location.pathname === '/all_movies'}
+              />
+            </Link>
+            <Link to='/all_books'>
+              <Menu.Item
+                name='books'
+                id='books'
+                active={this.props.location.pathname === '/all_books'}
+              />
+            </Link>
+          </Menu.Menu>
+          <Menu.Menu position='right'>
+            <Link to='/userpage'>
+              <Menu.Item
+                name={`${user.name}`}
+                id='userpage'
+                active={this.props.location.pathname === '/userpage'}
+              />
+            </Link>
             <Menu.Item
-              name={`${user.name}`}
-              id={`${user.email}`}
-              active={this.props.location.pathname === '/userpage'}
+              name='logout'
+              onClick={() => handleLogout(this.props.history)}
             />
-          </Link>
-        </Menu.Menu>
+          </Menu.Menu>
+        </>
       )
     } else {
       return (

@@ -10,6 +10,7 @@ user = User.create! :name => 'user', :email => 'test@test.com', :location => 'SL
 
 10.times do
   Artist.create(
+    name: Faker::Music::RockBand.name,
     albums: [Faker::Music.album, Faker::Music.album, Faker::Music.album],
     genre: Faker::Music.genre,
     user_id: 1,
