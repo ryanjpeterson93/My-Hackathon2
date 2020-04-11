@@ -27,7 +27,8 @@ end
     title: Faker::Book.title,
     summary: Faker::Lorem.paragraph(sentence_count: 3),
     genre: Faker::Book.genre,
-    runtime: Faker::Number.within(range: 65..185)
-    rating: [G, PG, PG13, M, R].sample
+    run_time: Faker::Number.within(range: 65..185),
+    rating: ['G', 'PG', 'PG13', 'M', 'R'].sample,
   )
+
 end
