@@ -58,7 +58,7 @@ const AllArtists = () => {
     <div>
       <h1 align="center">All Artists</h1>
       <hr />
-      <Button color="blue" onClick={handleClick}>{showForm ? "Close Form" : "Show Form"}</Button>
+      <Button color="blue" onClick={handleClick}>{showForm ? "Close Add Form" : "Show Add Form"}</Button>
       {showForm && <ArtistForm addArtist={addArtist} toggleForm={setShowForm} />}
       <br />
       <br />
