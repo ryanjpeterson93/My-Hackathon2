@@ -42,6 +42,9 @@ class UserPage extends React.Component {
           </div>
           <div>
             <Button style={style.button}>Add A Movie</Button>
+            <div>
+                
+            </div>
           </div>
         </div>
         <div>

@@ -1,92 +1,95 @@
-import React from "react";
+import React,{useContext} from "react";
 import axios from "axios";
 import { Form, Button } from "semantic-ui-react";
 import {AuthContext} from "../providers/AuthProvider";
 import {useFormInput,} from "./useFormInput";
 
- AddMovieForm =()=> {
+ const MovieForm =(props)=> {
   const {user} = useContext(AuthContext)
   const title = useFormInput("")
-  const summary = ueseFormInput("")
+  const summary = useFormInput("")
   const genre = useFormInput("")
   const run_time = useFormInput("")
   const rating = useFormInput("")
   
+  const {id,deleteMovie,editMovie,addMovie,movies} = props
 
-  MovieHold = {title:title.value, summary:summary, genre:genre, run_time:run_time, rating:rating}
+  const MovieHold = {title:title.value, summary:summary.value, genre:genre.value, run_time:run_time.value, rating:rating.value}
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post(`/api/users/${user}/movies`, MovieHold)
+    if (props.editing){
+      axios.put(`/api/users/${user.id}/movies`, MovieHold)
     .then(res => {
-      
-      this.setState(res.data)
+      const newMovies = movies.map((movie)=>{
+        if (movie.id===id){
+          return res.data;
+        }
+          return movie
+      });
+      //push to main state
+      // (res=> props.history.goBack())
     })
     .catch(err => {
       console.log(err)
     })
+  }else{
+
+    axios.post(`/api/users/${user.id}/movies`, MovieHold)
+    .then(res => {
+      props.add(res.data) // add function 
+      props.toggleForm()
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
   }
+}
 
-
-
-  render() {
-    const { title, summary, genre, run_time, rating } = this.state;
     return (
       <>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <Form.Input
             label="Title"
-            placeholder="Title"
+            placeholder={props.editing ? (props.title) : ("Title")}
             name="title"
             required
-            value={title}
-            onChange={this.handleChange}
+            {...title}
           />
           <Form.TextArea
             label="Summary"
-            placeholder="Summary"
+            placeholder={props.editing ? (props.summary) : ("Summary")}
             name="summary"
             required
-            value={summary}
-            onChange={this.handleChange}
+            {...summary}
           />
           <Form.Input
             label="Genre"
-            placeholder="Genre"
+            placeholder={props.editing ? (props.genre) : ("Genre")}
             name="genre"
             required
-            value={genre}
-            onChange={this.handleChange}
+            {...genre}
           />
           <Form.Input
             label="Run Time"
-            placeholder="Run Time in Minutes"
+            placeholder={props.editing ? (props.run_time) : ("Run Time in Minutes")}
             name="run_time"
             required
-            value={run_time}
-            onChange={this.handleChange}
+            {...run_time}
           />
           <Form.Input
             label="Rating"
-            placeholder="Rating"
+            placeholder={props.editing ? (props.rating) : ("Rating")}
             name="rating"
             required
-            value={rating}
-            onChange={this.handleChange}
+            {...rating}
           />
-          <Button type="submit">add</Button>
+          <Button type="submit">Submit</Button>
         </Form>
       </>
     );
-  }
+ 
 }
 
-export default class ConnectedAddMovieForm extends React.Component {
-  render() {
-    return (
-      <AuthConsumer>
-        { auth => <AddMovieForm {...this.props} auth={auth} />}
-      </AuthConsumer>
-    )
-  }
-}
+export default MovieForm
