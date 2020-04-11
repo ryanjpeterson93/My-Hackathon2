@@ -1,33 +1,36 @@
-import React, { useEffect, useState, } from 'react';
-import axios from 'axios';
-import { Card, } from 'semantic-ui-react';
+import React, { useState, useEffect, } from 'react';
+import axios from "axios"
 import Artist from './Artist';
 
 
-const AllArtists = () => {
-  const [ artists, setArtists ] = useState([]);
 
-  useEffect( () => {
-    axios.get('/api/movies')
-      .then( (res) => {
+const AllArtists = () => {
+  const [artists, setArtists] = useState([]);
+  
+
+  useEffect(() => {
+    axios.get("/api/all_artists")
+      .then(res => {
         setArtists(res.data)
+        console.log(res.data)
       })
-      .catch(console.log)
   }, []);
+
 
   const renderArtists = () => {
     return artists.map( artist => (
-      <Artist key={artist.id} {...artist} />
+      // <Artist key={artist.id} {...artist} />
+      artist.genre
     ))
   };
 
-  return(
+  return (
     <div>
-      <h1>All Artists</h1>
+      <h1 align="center">All Artists</h1>
+      <hr />
       {renderArtists()}
     </div>
-  )
-
-}
+  );
+};
 
 export default AllArtists;

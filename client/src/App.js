@@ -20,7 +20,7 @@ const App = () => (
             <ProtectedRoute exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/allartists" component={AllArtists} />
+            <Route exact path="/all_artists" component={AllArtists} />
             <Route component={NoMatch} />
           </Switch>
         </Container>
