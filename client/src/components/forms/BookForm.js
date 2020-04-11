@@ -23,16 +23,16 @@ const BookForm = (props) => {
       setGenre(props.genre)
       setUser_id(user.id)
     }
-  }, [])
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (props.editBook) {
-      props.editBook(props.id, book)
+      props.editBook(props.id, book, user.id)
       // toggle form after info is submitted
       props.toggleEdit()
     } else {
-      axios.post("/api/books", book)
+      axios.post(`/api/users/${user.id}/books`, book)
         .then( res => {
           props.addBook(res.data)
           props.toggleForm();
