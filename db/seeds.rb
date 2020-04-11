@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+user = User.create! :name => 'user', :email => 'test@test.com', :password => 'test1234', :password_confirmation => 'test1234'
+
 10.times do
   Artist.create(
     albums: [Faker::Music.album, Faker::Music.album, Faker::Music.album],
