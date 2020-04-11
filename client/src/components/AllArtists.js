@@ -9,7 +9,7 @@ const AllArtists = () => {
   
 
   useEffect(() => {
-    axios.get("/api/all_artists")
+    axios.get("/api/artists/all_artists")
       .then(res => {
         setArtists(res.data)
         console.log(res.data)
@@ -19,8 +19,7 @@ const AllArtists = () => {
 
   const renderArtists = () => {
     return artists.map( artist => (
-      // <Artist key={artist.id} {...artist} />
-      artist.genre
+      <Artist key={artist.id} {...artist} />
     ))
   };
 
