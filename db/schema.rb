@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2020_04_11_153459) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.string "location"
     t.string "name"
     t.string "nickname"
     t.string "image"
