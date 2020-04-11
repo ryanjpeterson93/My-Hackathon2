@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Button, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import MovieForm from '../forms/MovieForm'
+import BookForm from './forms/BookForm'
 
 class UserPage extends React.Component {
   state = {
@@ -11,7 +12,8 @@ class UserPage extends React.Component {
     artist: [],
     movies: [],
     firstCall: false,
-    showMovie: false
+    showMovie: false,
+    showBook: false
   }
 
   deleteUser = () => {
@@ -53,14 +55,14 @@ class UserPage extends React.Component {
             <h3 style={{ fontSize: '2vw' }}>Your Movies</h3>
           </div>
           <div>
-            <Button onClick={()=> this.setState({showMovie: true})}style={style.button}>Add A Movie</Button>
+            <Button onClick={() => this.setState({ showMovie: true })} style={style.button}>Add A Movie</Button>
           </div>
         </div>
         <div>
-        {this.state.showMovie ? <div><MovieForm /><Button style ={{color:'red'}}onClick={()=> {
-          this.setState({showMovie:false})
-          this.getAllItems(user.id)
-        }}
+          {this.state.showMovie ? <div><MovieForm /><Button style={{ color: 'red' }} onClick={() => {
+            this.setState({ showMovie: false })
+            this.getAllItems(user.id)
+          }}
           >Done</Button></div> : <></>}
         </div>
         <div>
@@ -191,6 +193,7 @@ class UserPage extends React.Component {
   }
 
   renderBooks = () => {
+    const { auth: { user, } } = this.props;
     const { books } = this.state
     return (
       <div style={style.categoryHolder}>
@@ -199,7 +202,18 @@ class UserPage extends React.Component {
             <h3 style={{ fontSize: '2vw' }}>Your Books</h3>
           </div>
           <div>
-            <Button style={style.button}>Add A Book</Button>
+            <Button onClick={() => this.setState({ showBook: true })} style={style.button}>Add A Book</Button>
+          </div>
+
+        </div>
+
+        <div>
+          <div>
+            {this.state.showBook ? <div><BookForm /><Button style={{ color: 'red' }} onClick={() => {
+              this.setState({ showBook: false })
+              this.getAllItems(user.id)
+            }}
+            >Done</Button></div> : <></>}
           </div>
         </div>
         <div>
