@@ -13,5 +13,4 @@ const Home = () => (
   <AllMovies />
   </>
 )
-
 export default Home;

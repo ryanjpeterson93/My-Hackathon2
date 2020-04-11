@@ -1,4 +1,4 @@
-import React, { useState, useEffect, } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from "axios"
 import Book from './Book';
 import {Button} from 'semantic-ui-react';
@@ -11,7 +11,7 @@ const AllBooks = () => {
   
 
   useEffect(() => {
-    axios.get("/api/books/all_books")
+    axios.get("/api/books")
       .then(res => {
         setBooks(res.data)
         console.log(res.data)

@@ -16,12 +16,35 @@ const AllMovies = () => {
       })
   }, []);
 
+console.log(movies)
 
-  const renderMovies = () => {
-    return movies.map( movie => (
-      <Movie key={movie.id} {...movie} />
-    ))
-  };
+const renderMovies = () =>{
+  return movies.map(movie =>(
+    <>
+    <div>
+    {movie.title}
+    {movie.summary}
+    {movie.genre}
+    {movie.run_time}
+    {movie.rating}
+    </div>
+    </>
+  ))
+}
+  // const renderMovies = () => {
+  //   return movies.map( movie => (
+      // <div key = {`movie-${movie.id}`}>
+      //  <Movie movie={movie} />
+    //   <div>
+  //   ))
+  // };
+
+  const deleteMovie = (id) => {
+    axios.delete(`/api/movies/${id}`)
+      .then( res => {
+        setMovies(movies.filter( (movie) => movie.id !== id))
+      })
+  }
 
   return (
     <div>

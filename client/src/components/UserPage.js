@@ -2,6 +2,7 @@ import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
 import axios from 'axios'
 import { Button, Icon } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 class UserPage extends React.Component {
   state = {
@@ -11,12 +12,9 @@ class UserPage extends React.Component {
     firstCall: false
   }
 
-  updateUser = () => {
-    console.log('update clicked')
-  }
-
   deleteUser = () => {
-    console.log('delete user clicked')
+    const { auth: { user, handleDelete, } , history} = this.props;
+    handleDelete(user,history )
   }
 
   deleteItem = (category, id) => {
@@ -44,6 +42,9 @@ class UserPage extends React.Component {
           </div>
           <div>
             <Button style={style.button}>Add A Movie</Button>
+            <div>
+                
+            </div>
           </div>
         </div>
         <div>
@@ -195,7 +196,7 @@ class UserPage extends React.Component {
   }
 
   render() {
-    const { auth: { user, handleLogout, } } = this.props;
+    const { auth: { user, } } = this.props;
     if (!this.state.firstCall) { this.getAllItems(user.id) }
     return (
       <div>
@@ -207,10 +208,10 @@ class UserPage extends React.Component {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
-              <Button style={{ color: 'red', borderRadius: '20px', fontSize: '1.5vw' }}>Delete</Button>
+              <Button onClick={this.deleteUser} style={{ color: 'red', borderRadius: '20px', fontSize: '1.5vw' }}>Delete</Button>
             </div>
             <div>
-              <Button style={{ color: 'white', backgroundColor: 'blue', borderRadius: '20px', fontSize: '1.5vw' }}>Update</Button>
+              <Link to='/updateuser'> <Button style={{ color: 'white', backgroundColor: 'blue', borderRadius: '20px', fontSize: '1.5vw' }}>Update</Button></Link>
             </div>
           </div>
         </div>

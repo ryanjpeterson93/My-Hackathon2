@@ -12,6 +12,7 @@ import { Container } from "semantic-ui-react";
 import FetchUser from "./components/FetchUser";
 import ProtectedRoute from "./components/ProtectedRoute";
 import UserPage from './components/UserPage'
+import UpdateUser from './components/UpdateUser'
 
 const App = () => (
   <>
@@ -22,6 +23,7 @@ const App = () => (
           <Switch>
             <ProtectedRoute exact path="/" component={Home} />
             <ProtectedRoute exact path='/userpage' component={UserPage} />
+            <ProtectedRoute exact path='/updateuser' component={UpdateUser} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/all_artists" component={AllArtists} />
