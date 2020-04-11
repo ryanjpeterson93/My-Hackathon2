@@ -27,11 +27,17 @@ const Artist = (props) => {
     // }));
   // };
 
+  const renderAlbums = () => {
+    for (let i=0; i < props.albums.length; i++) {
+      return props.albums[i]
+    }
+  }
+
   return (
     <Card>
       <Card.Header>Artist</Card.Header>
       <Card.Content>Genre: {props.genre}</Card.Content>
-      <Card.Content>Albums: {props.albums}</Card.Content>
+      <Card.Content>Albums: {renderAlbums()}</Card.Content>
     </Card>
   )
 }
