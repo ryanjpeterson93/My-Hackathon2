@@ -1,19 +1,15 @@
-import React, {  useState, useEffect, } from "react";
-import { Link, } from "react-router-dom";
+import React, {  useState, useEffect, useContext, } from "react";
 import { Card, Button, } from 'semantic-ui-react';
-import axios from 'axios';
-import MovieForm from '../forms/MovieForm'
+import MovieForm from '../forms/MovieForm';
+import {AuthContext} from '../providers/AuthProvider';
 
 const Movie = (props) => {
   const { movies, setMovies } = useState([]);
+  const { user } = useContext(AuthContext);
   const { editing, setEditing } = useState(false);
   
-  const toggle = () => {
-    setEditing({ editing: !setEditing })
-  }
+  const movie = { title: props.title, summary: props.summary, genre: props.genre, run_time: props.run_time, rating: props.rating}
 
-
-  const {id,title,summary,genre,run_time,rating,addMovie,editMovie}=props
   return (
     <Card>
       <Card.Header>{props.title}</Card.Header>
@@ -21,8 +17,9 @@ const Movie = (props) => {
       <Card.Meta>{props.run_time} min</Card.Meta>
       <Card.Meta>Rated: {props.rating}</Card.Meta>
       <Card.Content>{props.summary}</Card.Content>
-      <Button color="blue">Edit</Button>
-      <Button color="red">Delete</Button>
+      <Button color="blue" onClick={() => setEditing(!editing)}>Edit</Button>
+      <Button color="red" onClick={() => props.deleteMovie(props.id, user.id)}>Delete</Button>
+      { editing && <MovieForm toggleEdit={setEditing} editMovie={props.editMovie} {...props} />}
     </Card>
   )
 }

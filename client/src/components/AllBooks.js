@@ -59,7 +59,7 @@ const AllBooks = () => {
     <div>
       <h1>All Books</h1>
       <br />
-      <Button color="blue" onClick={handleClick}>{showForm ? "Close Form" : "Show Form"}</Button>
+      <Button color="blue" onClick={handleClick}>{showForm ? "Close Add Form" : "Show Add Form"}</Button>
       {showForm && <BookForm addBook={addBook} toggleForm={setShowForm} />}
       <br />
       <br />
