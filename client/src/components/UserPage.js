@@ -1,43 +1,152 @@
 import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
 import axios from 'axios'
+import { Button } from 'semantic-ui-react';
 
 class UserPage extends React.Component {
+  state = {
+    books: [],
+    artist: [],
+    movies: [],
+    firstCall: false
+  }
+
+  updateUser = () => {
+    console.log('update clicked')
+  }
+
+  deleteUser = () => {
+    console.log('delete user clicked')
+  }
+
+  deleteItem = (category, id) => {
+    console.log('delete clicked')
+  }
+
+  updateItem = (category, id)=>{
+
+  }
+
+  getAllItems = (id) => {
+    axios.get(`/api/users/1/artists`).then(res => this.setState({ artist: res.data }))
+    axios.get(`/api/users/1/movies`).then(res => this.setState({ movies: res.data }))
+    axios.get(`/api/users/1/books`).then(res => this.setState({ books: res.data }))
+    this.setState({ firstCall: true })
+  }
 
   renderMovies = () => {
+    const { movies } = this.state
     return (
       <div style={style.categoryHolder}>
         <div style={style.header}>
-          <h3 style={{fontSize:'2vw'}}>Your Movies</h3>
+          <div>
+          <h3 style={{ fontSize: '2vw' }}>Your Movies</h3>
+          </div>
+          <div>
+          <Button style={style.button}>Add A Movie</Button>
+          </div>
         </div>
         <div>
-          <h6>Nothing to show</h6>
+          {this.renderItem(movies, 'movies')}
         </div>
       </div>
     )
   }
 
+  renderItem = (category, name) => {
+    if (category.length === 0) {
+      return (
+        <div style={{ padding: '1%' }}>
+          <h1 style={{ fontSize: '1vw' }}>NOTHING TO SHOW</h1>
+        </div>
+      )
+    }
+    else {
+      if (name === 'movies') {
+        return (
+          <div>
+            {category.map(item => {
+              return (
+                <div style={style.item}>
+                  {item.title}
+                  {item.summary}
+                  {item.genre}
+                  {item.run_time}
+                  {item.rating}
+                </div>
+              )
+            })}
+          </div>
+        )
+      }
+      else if (name === 'books') {
+        return (
+          <div>
+            {category.map(item => {
+              return (
+                <div style={style.item}>
+                  {item.title}
+                  {item.author}
+                  {item.genre}
+                  {item.summary}
+                </div>
+              )
+            })}
+          </div>
+        )
+      }
+      else {
+        return (
+          <div>
+            {category.map(item => {
+              return (
+                <div style={style.item}>
+                  {item.albums}
+                  {item.genre}
+                </div>
+              )
+            })}
+          </div>
+        )
+      }
+    }
+  }
+
   renderArtists = () => {
+    const { artist } = this.state
     return (
       <div style={style.categoryHolder}>
         <div style={style.header}>
-          <h3 style={{fontSize:'2vw'}}>Your Artist</h3>
+          <div>
+          <h3 style={{ fontSize: '2vw' }}>Your Artists</h3>
+          </div>
+          <div>
+          <Button style={style.button}>Add An Artist</Button>
+          </div>
         </div>
         <div>
-          <h6>Nothing to show</h6>
+          {this.renderItem(artist, 'artist')}
         </div>
       </div>
     )
   }
 
   renderBooks = () => {
+    const { books } = this.state
     return (
       <div style={style.categoryHolder}>
         <div style={style.header}>
-          <h3 style={{fontSize:'2vw'}}>Your Books</h3>
+          <div>
+          <h3 style={{ fontSize: '2vw' }}>Your Books</h3>
+          </div>
+          <div>
+          <Button style={style.button}>Add A Book</Button>
+          </div>
         </div>
         <div>
-          <h6>Nothing to show</h6>
+
+
+          {this.renderItem(books, 'books')}
         </div>
       </div>
     )
@@ -45,11 +154,23 @@ class UserPage extends React.Component {
 
   render() {
     const { auth: { user, handleLogout, } } = this.props;
+    if (!this.state.firstCall) { this.getAllItems(user.id) }
     return (
       <div>
         <div style={style.userHolder}>
-          <h1 style={{fontSize:'3vw'}}>{user.email}</h1>
-          <h3 style={{fontSize:'2vw'}}>{user.location}</h3>
+          <div>
+          <h1 style={{ fontSize: '3vw' }}>{user.name}</h1>
+          <h3 style={{ fontSize: '2vw' }}>Email:{user.email}</h3>
+          <h3 style={{ fontSize: '2vw' }}>Location:{user.location}</h3>
+          </div>
+          <div style={{display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
+            <div>
+            <Button style={{color:'red',borderRadius:'20px', fontSize:'1.5vw'}}>Delete</Button>
+            </div>
+            <div>
+            <Button style={{color:'white', backgroundColor:'blue', borderRadius:'20px',fontSize:'1.5vw'}}>Update</Button>
+            </div>
+          </div>
         </div>
         {this.renderMovies()}
         {this.renderArtists()}
@@ -84,13 +205,21 @@ const style = {
     boxShadow: '0px 5px 5px #999',
     margin: '3%',
     padding: '2%',
+    display:'flex',
+    justifyContent:'space-between'
   },
   header: {
     backgroundColor: '#666',
     color: 'white',
     borderTopLeftRadius: '10px',
     borderTopRightRadius: '10px',
-    padding: '1%'
+    padding: '1%',
+    display:'flex',
+    justifyContent:'space-between'
+  },
+  button:{
+    borderRadius:'20px',
+    fontSize:'1vw'
   }
 }
 

@@ -4,7 +4,7 @@ class Api::ArtistsController < ApplicationController
 
 
   def all_artists
-    render json: Artists.all
+    render json: Artist.all
   end
 
   def index

@@ -17,7 +17,7 @@ class Navbar extends React.Component {
           />
           <Link to='/userpage'>
             <Menu.Item
-              name={`${user.email}`}
+              name={`${user.name}`}
               id={`${user.email}`}
               active={this.props.location.pathname === '/userpage'}
             />

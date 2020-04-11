@@ -28,6 +28,12 @@ export class AuthProvider extends React.Component {
         console.log(res);
       })
   }
+  handleUpdate = (user, history) => {
+    axios.put("/api/auth", user)
+      .then(res => {
+        history.push('/userpage')
+      })
+  }
   
   handleLogout = (history) => {
     axios.delete("/api/auth/sign_out")
