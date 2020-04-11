@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header, } from 'semantic-ui-react';
-import MovieForm from '../forms/AddMovieForm'
+import MovieForm from '../forms/MovieForm'
 import ArtistForm from '../forms/ArtistForm'
 
 const Home = () => (

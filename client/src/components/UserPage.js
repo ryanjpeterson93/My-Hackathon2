@@ -18,7 +18,8 @@ class UserPage extends React.Component {
   }
 
   deleteItem = (category, id) => {
-    console.log('delete clicked')
+    const { auth: { user, handleDelete, } , history} = this.props;
+    axios.delete(`/api/users/${user.id}/${category}/${id}`)
   }
 
   updateItem = (category, id) => {
@@ -84,7 +85,7 @@ class UserPage extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <Button style={{ color: 'red' }} compact><Icon name='trash alternate' />Delete</Button>
+                    <Button style={{ color: 'red' }}  onClick={()=>{name, item.id }} compact><Icon name='trash alternate' />Delete</Button>
                     <Button style={{ color: 'white', backgroundColor: 'blue' }} compact><Icon name='edit' />Edit</Button>
                   </div>
                 </div>
@@ -115,7 +116,7 @@ class UserPage extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <Button style={{ color: 'red' }} compact><Icon name='trash alternate' />Delete</Button>
+                    <Button style={{ color: 'red' }} onClick={()=>{name, item.id }} compact><Icon name='trash alternate' />Delete</Button>
                     <Button style={{ color: 'white', backgroundColor: 'blue' }} compact><Icon name='edit' />Edit</Button>
                   </div>
                 </div>
@@ -165,7 +166,7 @@ class UserPage extends React.Component {
           </div>
         </div>
         <div>
-          {this.renderItem(artist, 'artist')}
+          {this.renderItem(artist, 'artists')}
         </div>
       </div>
     )
