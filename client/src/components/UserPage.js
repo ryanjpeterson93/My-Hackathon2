@@ -1,7 +1,7 @@
 import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
 import axios from 'axios'
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 
 class UserPage extends React.Component {
   state = {
@@ -23,7 +23,7 @@ class UserPage extends React.Component {
     console.log('delete clicked')
   }
 
-  updateItem = (category, id)=>{
+  updateItem = (category, id) => {
 
   }
 
@@ -40,10 +40,10 @@ class UserPage extends React.Component {
       <div style={style.categoryHolder}>
         <div style={style.header}>
           <div>
-          <h3 style={{ fontSize: '2vw' }}>Your Movies</h3>
+            <h3 style={{ fontSize: '2vw' }}>Your Movies</h3>
           </div>
           <div>
-          <Button style={style.button}>Add A Movie</Button>
+            <Button style={style.button}>Add A Movie</Button>
           </div>
         </div>
         <div>
@@ -68,11 +68,27 @@ class UserPage extends React.Component {
             {category.map(item => {
               return (
                 <div style={style.item}>
-                  {item.title}
-                  {item.summary}
-                  {item.genre}
-                  {item.run_time}
-                  {item.rating}
+                  <div style={{ width: '50%' }}>
+                    <h2 style={{ marginBottom: '2%' }}>{item.title}</h2>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <div>
+                        <h5 style={{ margin: '0px' }}>Summary</h5>
+                        <h6 style={{ margin: '0px' }}>{item.summary}</h6>
+                        <h5 style={{ margin: '0px' }}>Genre</h5>
+                        <h6 style={{ margin: '0px' }}>{item.genre}</h6>
+                      </div>
+                      <div>
+                        <h5 style={{ margin: '0px' }}>Runtime</h5>
+                        <h6 style={{ margin: '0px' }}>{item.run_time}</h6>
+                        <h5 style={{ margin: '0px' }}>Rating</h5>
+                        <h6 style={{ margin: '0px' }}>{item.rating}</h6>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <Button style={{ color: 'red' }} compact><Icon name='trash alternate' />Delete</Button>
+                    <Button style={{ color: 'white', backgroundColor: 'blue' }} compact><Icon name='edit' />Edit</Button>
+                  </div>
                 </div>
               )
             })}
@@ -85,10 +101,25 @@ class UserPage extends React.Component {
             {category.map(item => {
               return (
                 <div style={style.item}>
-                  {item.title}
-                  {item.author}
-                  {item.genre}
-                  {item.summary}
+                  <div style={{ width: '50%' }}>
+                    <h2 style={{ marginBottom: '2%' }}>{item.title}</h2>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <div>
+                        <h5 style={{ margin: '0px' }}>Author</h5>
+                        <h6 style={{ margin: '0px' }}>{item.author}</h6>
+                        <h5 style={{ margin: '0px' }}>Summary</h5>
+                        <h6 style={{ margin: '0px' }}>{item.summary}</h6>
+                      </div>
+                      <div>
+                        <h5 style={{ margin: '0px' }}>Genre</h5>
+                        <h6 style={{ margin: '0px' }}>{item.genre}</h6>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <Button style={{ color: 'red' }} compact><Icon name='trash alternate' />Delete</Button>
+                    <Button style={{ color: 'white', backgroundColor: 'blue' }} compact><Icon name='edit' />Edit</Button>
+                  </div>
                 </div>
               )
             })}
@@ -101,8 +132,19 @@ class UserPage extends React.Component {
             {category.map(item => {
               return (
                 <div style={style.item}>
-                  {item.albums}
-                  {item.genre}
+                  <div style={{ width: '50%' }}>
+                    <h2 style={{ marginBottom: '2%' }}>Name</h2>
+                    <div >
+                      <h5 style={{ margin: '0px' }}>Genre</h5>
+                      <h6 style={{ margin: '0px' }}>{item.genre}</h6>
+                      <h5 style={{ margin: '0px' }}>Albums</h5>
+                      <h6 style={{ margin: '0px' }}>{item.albums}</h6>
+                    </div>
+                  </div>
+                  <div>
+                    <Button style={{ color: 'red' }} compact><Icon name='trash alternate' />Delete</Button>
+                    <Button style={{ color: 'white', backgroundColor: 'blue' }} compact><Icon name='edit' />Edit</Button>
+                  </div>
                 </div>
               )
             })}
@@ -118,10 +160,10 @@ class UserPage extends React.Component {
       <div style={style.categoryHolder}>
         <div style={style.header}>
           <div>
-          <h3 style={{ fontSize: '2vw' }}>Your Artists</h3>
+            <h3 style={{ fontSize: '2vw' }}>Your Artists</h3>
           </div>
           <div>
-          <Button style={style.button}>Add An Artist</Button>
+            <Button style={style.button}>Add An Artist</Button>
           </div>
         </div>
         <div>
@@ -137,10 +179,10 @@ class UserPage extends React.Component {
       <div style={style.categoryHolder}>
         <div style={style.header}>
           <div>
-          <h3 style={{ fontSize: '2vw' }}>Your Books</h3>
+            <h3 style={{ fontSize: '2vw' }}>Your Books</h3>
           </div>
           <div>
-          <Button style={style.button}>Add A Book</Button>
+            <Button style={style.button}>Add A Book</Button>
           </div>
         </div>
         <div>
@@ -159,16 +201,16 @@ class UserPage extends React.Component {
       <div>
         <div style={style.userHolder}>
           <div>
-          <h1 style={{ fontSize: '3vw' }}>{user.name}</h1>
-          <h3 style={{ fontSize: '2vw' }}>Email:{user.email}</h3>
-          <h3 style={{ fontSize: '2vw' }}>Location:{user.location}</h3>
+            <h1 style={{ fontSize: '3vw' }}>{user.name}</h1>
+            <h3 style={{ fontSize: '2vw' }}>Email:{user.email}</h3>
+            <h3 style={{ fontSize: '2vw' }}>Location:{user.location}</h3>
           </div>
-          <div style={{display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
-            <Button style={{color:'red',borderRadius:'20px', fontSize:'1.5vw'}}>Delete</Button>
+              <Button style={{ color: 'red', borderRadius: '20px', fontSize: '1.5vw' }}>Delete</Button>
             </div>
             <div>
-            <Button style={{color:'white', backgroundColor:'blue', borderRadius:'20px',fontSize:'1.5vw'}}>Update</Button>
+              <Button style={{ color: 'white', backgroundColor: 'blue', borderRadius: '20px', fontSize: '1.5vw' }}>Update</Button>
             </div>
           </div>
         </div>
@@ -198,15 +240,15 @@ const style = {
     boxShadow: '0px 5px 5px #999',
     margin: '3%',
     padding: '0px',
-    textAlign: 'center',
+    backgroundColor: '#e3e3e3'
   },
   userHolder: {
     borderRadius: '20px',
     boxShadow: '0px 5px 5px #999',
     margin: '3%',
     padding: '2%',
-    display:'flex',
-    justifyContent:'space-between'
+    display: 'flex',
+    justifyContent: 'space-between'
   },
   header: {
     backgroundColor: '#666',
@@ -214,12 +256,21 @@ const style = {
     borderTopLeftRadius: '10px',
     borderTopRightRadius: '10px',
     padding: '1%',
-    display:'flex',
-    justifyContent:'space-between'
+    display: 'flex',
+    justifyContent: 'space-between'
   },
-  button:{
-    borderRadius:'20px',
-    fontSize:'1vw'
+  button: {
+    borderRadius: '20px',
+    fontSize: '1vw'
+  },
+  item: {
+    backgroundColor: 'white',
+    boxShadow: '0px 2px 10px #999',
+    margin: '1% 3%',
+    padding: '2%',
+    borderRadius: '5px',
+    display: 'flex',
+    justifyContent: 'space-between',
   }
 }
 
