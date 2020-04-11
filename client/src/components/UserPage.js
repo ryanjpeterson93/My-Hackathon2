@@ -3,23 +3,27 @@ import { AuthConsumer, } from "../providers/AuthProvider";
 import axios from 'axios'
 import { Button, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import MovieForm from '../forms/MovieForm'
 
 class UserPage extends React.Component {
   state = {
     books: [],
     artist: [],
     movies: [],
-    firstCall: false
+    firstCall: false,
+    showMovie: false
   }
 
   deleteUser = () => {
-    const { auth: { user, handleDelete, } , history} = this.props;
-    handleDelete(user,history )
+    const { auth: { user, handleDelete, }, history } = this.props;
+    handleDelete(user, history)
   }
 
   deleteItem = (category, id) => {
-    const { auth: { user, handleDelete, } , history} = this.props;
-    axios.delete(`/api/users/${user.id}/${category}/${id}`)
+    const { auth: { user, }, history } = this.props;
+    axios.delete(`/api/users/${user.id}/${category}/${id}`).then(res => {
+      this.getAllItems(user.id)
+    })
   }
 
   updateItem = (category, id) => {
@@ -27,14 +31,21 @@ class UserPage extends React.Component {
   }
 
   getAllItems = (id) => {
-    axios.get(`/api/users/1/artists`).then(res => this.setState({ artist: res.data }))
-    axios.get(`/api/users/1/movies`).then(res => this.setState({ movies: res.data }))
-    axios.get(`/api/users/1/books`).then(res => this.setState({ books: res.data }))
+    this.setState({
+      books: [],
+      artist: [],
+      movies: [],
+    })
+    axios.get(`/api/users/${id}/artists`).then(res => this.setState({ artist: res.data }))
+    axios.get(`/api/users/${id}/movies`).then(res => this.setState({ movies: res.data }))
+    axios.get(`/api/users/${id}/books`).then(res => this.setState({ books: res.data }))
     this.setState({ firstCall: true })
   }
 
   renderMovies = () => {
     const { movies } = this.state
+    const { auth: { user, } } = this.props;
+
     return (
       <div style={style.categoryHolder}>
         <div style={style.header}>
@@ -42,11 +53,15 @@ class UserPage extends React.Component {
             <h3 style={{ fontSize: '2vw' }}>Your Movies</h3>
           </div>
           <div>
-            <Button style={style.button}>Add A Movie</Button>
-            <div>
-                
-            </div>
+            <Button onClick={()=> this.setState({showMovie: true})}style={style.button}>Add A Movie</Button>
           </div>
+        </div>
+        <div>
+        {this.state.showMovie ? <div><MovieForm /><Button style ={{color:'red'}}onClick={()=> {
+          this.setState({showMovie:false})
+          this.getAllItems(user.id)
+        }}
+          >Done</Button></div> : <></>}
         </div>
         <div>
           {this.renderItem(movies, 'movies')}
@@ -88,7 +103,7 @@ class UserPage extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <Button style={{ color: 'red' }}  onClick={()=>{name, item.id }} compact><Icon name='trash alternate' />Delete</Button>
+                    <Button style={{ color: 'red' }} onClick={() => { this.deleteItem(name, item.id) }} compact><Icon name='trash alternate' />Delete</Button>
                     <Button style={{ color: 'white', backgroundColor: 'blue' }} compact><Icon name='edit' />Edit</Button>
                   </div>
                 </div>
@@ -119,7 +134,7 @@ class UserPage extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <Button style={{ color: 'red' }} onClick={()=>{name, item.id }} compact><Icon name='trash alternate' />Delete</Button>
+                    <Button style={{ color: 'red' }} onClick={() => { this.deleteItem(name, item.id) }} compact><Icon name='trash alternate' />Delete</Button>
                     <Button style={{ color: 'white', backgroundColor: 'blue' }} compact><Icon name='edit' />Edit</Button>
                   </div>
                 </div>
@@ -144,7 +159,7 @@ class UserPage extends React.Component {
                     </div>
                   </div>
                   <div>
-                    <Button style={{ color: 'red' }} compact><Icon name='trash alternate' />Delete</Button>
+                    <Button style={{ color: 'red' }} onClick={() => { this.deleteItem(name, item.id) }} compact><Icon name='trash alternate' />Delete</Button>
                     <Button style={{ color: 'white', backgroundColor: 'blue' }} compact><Icon name='edit' />Edit</Button>
                   </div>
                 </div>
