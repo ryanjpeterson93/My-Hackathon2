@@ -8,8 +8,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  has_many :movies,
-  has_many :books,
-  has_many :artists,
+  has_many :movies
+  has_many :books
+  has_many :artists
 
 end
