@@ -10,6 +10,6 @@ class User < ActiveRecord::Base
 
   has_many :movies
   has_many :books
-  has_many :artistsr
+  has_many :artists
 
 end
