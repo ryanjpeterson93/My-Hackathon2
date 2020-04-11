@@ -7,11 +7,11 @@ class Register extends React.Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password, passwordConfirmation, location } = this.state;
+    const { email, password, passwordConfirmation, location, name } = this.state;
     const { auth: { handleRegister, }, history, } = this.props;
 
     if (password === passwordConfirmation)
-      handleRegister({ email, password, passwordConfirmation,location }, history);
+      handleRegister({ email, password, passwordConfirmation, name, location }, history);
     else
       alert('Passwords Do Not Match!')
   }
@@ -22,7 +22,7 @@ class Register extends React.Component {
   }
   
   render() {
-    const { email, password, passwordConfirmation, location } = this.state;
+    const { email, password, passwordConfirmation, location, name } = this.state;
     
     return (
       <Segment basic>
@@ -35,6 +35,14 @@ class Register extends React.Component {
             name='email'
             value={email}
             placeholder='Email'
+            onChange={this.handleChange}
+          />
+          <Form.Input
+            label="Name"
+            required
+            name='name'
+            value={name}
+            placeholder='Name'
             onChange={this.handleChange}
           />
           <Form.Input
