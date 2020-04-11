@@ -10,6 +10,7 @@
   Artist.create(
     albums: [Faker::Music.album, Faker::Music.album, Faker::Music.album],
     genre: Faker::Music.genre,
+    user_id:1
   )
 end
 
@@ -19,6 +20,7 @@ end
     author: Faker::Book.author,
     summary: Faker::Lorem.paragraph(sentence_count: 3),
     genre: Faker::Book.genre,
+    user_id:1
   )
 end
 
@@ -29,6 +31,7 @@ end
     genre: Faker::Book.genre,
     run_time: Faker::Number.within(range: 65..185),
     rating: ['G', 'PG', 'PG13', 'M', 'R'].sample,
+    user_id:1
   )
 
 end
