@@ -3,7 +3,7 @@ class Api::BooksController < ApplicationController
   before_action :set_books, only: [:show, :update, :destroy]
 
   def all_books
-    render json: Books.all
+    render json: Book.all
   end
 
   def index
