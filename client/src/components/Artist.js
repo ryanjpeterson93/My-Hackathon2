@@ -8,14 +8,14 @@ const Artist = (props) => {
  
   const artist = {id: props.id, albums: props.albums, genre: props.genre, }
  
-  console.log(artist.albums)
-  let albumsShow = albumsalbums.map((str) => ({ name: str}));
+ 
+  // let albumsShow = artist.albums.map((str) => ({ name: str}));
   
-  const renderAlbums = () => {
-    return(
-    albumsShow.map(album=>{
-      return album.name
-    }))
+  // const renderAlbums = () => {
+  //   return(
+  //   albumsShow.map(album=>{
+  //     return album.name
+  //   }))
 
     // const renderArtists = () => {
     //   return artists.map( artist => (
@@ -26,14 +26,12 @@ const Artist = (props) => {
     //   return "album"
     // }));
   // };
-  
 
   return (
-    
     <Card>
       <Card.Header>Artist</Card.Header>
       <Card.Content>Genre: {props.genre}</Card.Content>
-      {/* <Card.Content>Albums: {renderAlbums()}</Card.Content> */}
+      <Card.Content>Albums: {props.albums}</Card.Content>
     </Card>
   )
 }
