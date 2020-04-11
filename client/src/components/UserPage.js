@@ -7,7 +7,9 @@ class UserPage extends React.Component {
   renderMovies = () => {
     return (
       <div style={style.categoryHolder}>
-        <h3>Your Movies</h3>
+        <div style={style.header}>
+          <h3 style={{fontSize:'2vw'}}>Your Movies</h3>
+        </div>
         <div>
           <h6>Nothing to show</h6>
         </div>
@@ -18,7 +20,9 @@ class UserPage extends React.Component {
   renderArtists = () => {
     return (
       <div style={style.categoryHolder}>
-        <h3>Your Artist</h3>
+        <div style={style.header}>
+          <h3 style={{fontSize:'2vw'}}>Your Artist</h3>
+        </div>
         <div>
           <h6>Nothing to show</h6>
         </div>
@@ -29,7 +33,9 @@ class UserPage extends React.Component {
   renderBooks = () => {
     return (
       <div style={style.categoryHolder}>
-        <h3>Your Books</h3>
+        <div style={style.header}>
+          <h3 style={{fontSize:'2vw'}}>Your Books</h3>
+        </div>
         <div>
           <h6>Nothing to show</h6>
         </div>
@@ -42,8 +48,8 @@ class UserPage extends React.Component {
     return (
       <div>
         <div style={style.userHolder}>
-          <h1>{user.email}</h1>
-          <h3>{user.location}</h3>
+          <h1 style={{fontSize:'3vw'}}>{user.email}</h1>
+          <h3 style={{fontSize:'2vw'}}>{user.location}</h3>
         </div>
         {this.renderMovies()}
         {this.renderArtists()}
@@ -67,17 +73,24 @@ class ConnectedUserPage extends React.Component {
 
 const style = {
   categoryHolder: {
-    borderRadius: '20px',
-    boxShadow: '0px 7px 10px #333',
+    borderRadius: '10px',
+    boxShadow: '0px 5px 5px #999',
     margin: '3%',
-    padding: '1%',
-    textAlign: 'center'
+    padding: '0px',
+    textAlign: 'center',
   },
   userHolder: {
     borderRadius: '20px',
-    boxShadow: '0px 7px 10px #333',
+    boxShadow: '0px 5px 5px #999',
     margin: '3%',
-    padding: '1%',
+    padding: '2%',
+  },
+  header: {
+    backgroundColor: '#666',
+    color: 'white',
+    borderTopLeftRadius: '10px',
+    borderTopRightRadius: '10px',
+    padding: '1%'
   }
 }
 
