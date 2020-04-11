@@ -6,10 +6,11 @@ import Book from './Book';
 
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
+  const [showForm, setShowForm] = useState(false);
   
 
   useEffect(() => {
-    axios.get("/api/books/all_books")
+    axios.get("/api/books")
       .then(res => {
         setBooks(res.data)
         console.log(res.data)
@@ -17,9 +18,21 @@ const AllBooks = () => {
   }, []);
 
 
+  const editBook = (id, book) => {
+    axios.put(`api/books/${id}`, book)
+      .then( res => {
+        const updateBook = books.map( book => {
+          if(book.id === id)
+            return res.data
+          return book;
+        })
+        setBooks(updateBook)
+      })
+  }
+
   const renderBooks = () => {
     return books.map( book => (
-      <Book key={book.id} {...book} />
+      <Book key={book.id} {...book} editBook={editBook}/>
     ))
   };
 

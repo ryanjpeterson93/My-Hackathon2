@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const Movie = (props) => {
   const { movies, setMovies } = useState([]);
+  const { editing, setEditing } = useState(false);
  
   const book = {id: props.id, title: props.title, summary: props.summary, genre: props.genre, run_time: props.run_time, rating: props.rating, }
 
