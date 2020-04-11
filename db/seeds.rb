@@ -6,12 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user = User.create! :name => 'user', :email => 'test@test.com', :password => 'test1234', :password_confirmation => 'test1234'
+user = User.create! :name => 'user', :email => 'test@test.com', :location => 'SLC', :password => 'test1234', :password_confirmation => 'test1234'
 
 10.times do
   Artist.create(
     albums: [Faker::Music.album, Faker::Music.album, Faker::Music.album],
     genre: Faker::Music.genre,
+    user_id: 1,
   )
 end
 
@@ -21,6 +22,7 @@ end
     author: Faker::Book.author,
     summary: Faker::Lorem.paragraph(sentence_count: 3),
     genre: Faker::Book.genre,
+    user_id: 1,
   )
 end
 
@@ -30,6 +32,7 @@ end
     summary: Faker::Lorem.paragraph(sentence_count: 3),
     genre: Faker::Book.genre,
     run_time: Faker::Number.within(range: 65..185),
-    rating: ['G', 'PG', 'PG13', 'M', 'R'].sample
+    rating: ['G', 'PG', 'PG13', 'M', 'R'].sample,
+    user_id: 1,
   )
 end
