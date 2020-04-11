@@ -36,4 +36,5 @@ end
     rating: ['G', 'PG', 'PG13', 'M', 'R'].sample,
     user_id: 1,
   )
+
 end
