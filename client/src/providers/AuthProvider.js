@@ -31,6 +31,7 @@ export class AuthProvider extends React.Component {
   handleUpdate = (user, history) => {
     axios.put("/api/auth", user)
       .then(res => {
+        this.setState({ user: res.data.data, });
         history.push('/userpage')
       })
   }
@@ -45,6 +46,14 @@ export class AuthProvider extends React.Component {
         console.log(res);
       })
   }
+
+  handleDelete = (user, history)=>{
+    axios.delete('api/auth', user)
+    .then(res => {
+      this.setState({ user: null, });
+        history.push('/login');
+    })
+  }
   
   render() {
     return (
@@ -54,6 +63,8 @@ export class AuthProvider extends React.Component {
         handleRegister: this.handleRegister,
         handleLogin: this.handleLogin,
         handleLogout: this.handleLogout,
+        handleUpdate: this.handleUpdate,
+        handleDelete: this.handleDelete,
         setUser: (user) => this.setState({ user, }),
       }}>
         { this.props.children }
