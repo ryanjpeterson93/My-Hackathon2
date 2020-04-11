@@ -5,6 +5,8 @@ import Navbar from "./components/NavBar";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import AllArtists from './components/AllArtists';
+import AllBooks from './components/AllBooks';
+import AllMovies from './components/AllMovies';
 import { Switch, Route } from "react-router-dom";
 import { Container } from "semantic-ui-react";
 import FetchUser from "./components/FetchUser";

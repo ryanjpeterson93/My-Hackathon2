@@ -19,4 +19,4 @@ const Movie = (props) => {
   )
 }
 
-export default Book;
+export default Movie;

@@ -8,19 +8,14 @@ const Artist = (props) => {
  
   const artist = {id: props.id, albums: props.albums, genre: props.genre, }
  
-
+  console.log(artist.albums)
+  let albumsShow = albumsalbums.map((str) => ({ name: str}));
+  
   const renderAlbums = () => {
-    albums = props.albums
-
-    let albumsShow = albums.map((str) => ({ name: str}));
-
+    return(
     albumsShow.map(album=>{
-     
-      <>
-      {album.name}
-      </>
-    
-    })
+      return album.name
+    }))
 
     // const renderArtists = () => {
     //   return artists.map( artist => (
@@ -30,15 +25,15 @@ const Artist = (props) => {
     // return( albums.forEach( album => {
     //   return "album"
     // }));
-  };
+  // };
   
 
   return (
     
     <Card>
       <Card.Header>Artist</Card.Header>
-      <Card.Content>Genre: {}</Card.Content>
-      <Card.Content>Albums: {renderAlbums()}</Card.Content>
+      <Card.Content>Genre: {props.genre}</Card.Content>
+      {/* <Card.Content>Albums: {renderAlbums()}</Card.Content> */}
     </Card>
   )
 }

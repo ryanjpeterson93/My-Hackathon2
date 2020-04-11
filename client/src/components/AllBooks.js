@@ -18,8 +18,8 @@ const AllBooks = () => {
 
 
   const renderBooks = () => {
-    return books.map( artist => (
-      <Artist key={artist.id} {...artist} />
+    return books.map( book => (
+      <Book key={book.id} {...book} />
     ))
   };
 

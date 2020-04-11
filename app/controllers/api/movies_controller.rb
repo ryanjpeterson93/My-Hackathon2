@@ -3,7 +3,7 @@ class Api::MoviesController < ApplicationController
   before_action :set_movies, only: [:show, :update, :destroy]
 
   def all_movies
-    render json: Movies.all
+    render json: Movie.all
   end
 
   def index
