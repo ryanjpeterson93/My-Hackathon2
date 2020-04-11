@@ -1,4 +1,4 @@
-import React, { useState, useEffect, } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Form, Button } from "semantic-ui-react";
 import {AuthContext,} from "../providers/AuthProvider";
@@ -14,7 +14,7 @@ const BookForm = (props) => {
   const [author, setAuthor] = useState('')
   const [summary, setSummary] = useState('')
   const [genre, setGenre] = useState('')
-  const [user_id, setUser_id] = useState(user.id);
+  const [user_id, setUser_id] = useState('');
 
 
   const book = { title: title, author: author, summary: summary, genre: genre }
@@ -26,6 +26,7 @@ const BookForm = (props) => {
       setAuthor(props.author)
       setSummary(props.summary)
       setGenre(props.genre)
+      setUser_id(user.id)
     }
   }, [])
 

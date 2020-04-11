@@ -54,10 +54,12 @@ export class AuthProvider extends React.Component {
         handleRegister: this.handleRegister,
         handleLogin: this.handleLogin,
         handleLogout: this.handleLogout,
+        handleUpdate: this.handleUpdate,
+        handleDelete: this.handleDelete,
         setUser: (user) => this.setState({ user, }),
       }}>
         { this.props.children }
       </AuthContext.Provider>
     )
-  }
-};
+}  
+}

@@ -1,7 +1,8 @@
-import React, { useState, useEffect, } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from "axios"
 import Book from './Book';
-
+import {Button} from 'semantic-ui-react';
+import BookForm from '../forms/BookForm';
 
 
 const AllBooks = () => {
@@ -16,6 +17,15 @@ const AllBooks = () => {
         console.log(res.data)
       })
   }, []);
+
+  const addBook = (book) => setBooks([book, ...books])
+
+  const deleteBook = (id) => {
+    axios.delete(`/api/books/${id}`)
+      .then( res => {
+        setBooks(books.filter( (book) => book.id !== id))
+      })
+  }
 
 
   const editBook = (id, book) => {
@@ -38,8 +48,14 @@ const AllBooks = () => {
 
   return (
     <div>
-      <h1 align="center">All Books</h1>
-      <hr />
+      <h1>All Books</h1>
+      <br />
+      <Button onClick={() => setShowForm(!setShowForm)}>
+        {showForm ? "Close Form" : "Show Form"}
+      </Button>
+      {showForm && <BookForm addBook={addBook} toggleForm={setShowForm} />}
+      <br />
+      <br />
       {renderBooks()}
     </div>
   );
