@@ -6,7 +6,7 @@ import axios from 'axios';
 const Artist = (props) => {
   const { albums, setAlbums } = useState([]);
  
-  const artist = {id: props.id, albums: props.albums, genre: props.genre, }
+  const artist = {id: props.id, albums: props.albums, genre: props.genre, name: props.name, }
  
  
   // let albumsShow = artist.albums.map((str) => ({ name: str}));
@@ -28,14 +28,15 @@ const Artist = (props) => {
   // };
 
   const renderAlbums = () => {
-    for (let i=0; i < props.albums.length; i++) {
-      return props.albums[i]
+    console.log(props.albums.length)
+    for (let i = 0; i < props.albums.length - 1; i++) {
+      return (<Card.Content>{props.albums[i]}</Card.Content>)
     }
   }
 
   return (
     <Card>
-      <Card.Header>Artist</Card.Header>
+      <Card.Header>{props.name}</Card.Header>
       <Card.Content>Genre: {props.genre}</Card.Content>
       <Card.Content>Albums: {renderAlbums()}</Card.Content>
     </Card>
